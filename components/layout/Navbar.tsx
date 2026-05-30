@@ -3,57 +3,42 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
-
 import { navbarLinks } from "@/data/navbar";
 import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [courseOpen, setCourseOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState("");
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur-md">
-      <nav className="container-custom flex h-20 items-center justify-between">
-        {/* Logo */}
-
-        <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#8B1E2D] text-white font-bold">
-            A
-          </div>
-
-          <div>
-            <h1 className="font-bold text-[#8B1E2D] text-lg">
-              Aspire Tuition
-            </h1>
-
-            <p className="text-xs text-gray-500">
-              Learn • Grow • Succeed
-            </p>
-          </div>
+    <header className="nav">
+      <nav className="nav-inner">
+        {/* BRAND */}
+        <Link href="/" className="brand">
+          <span className="brand-title">ASPIRE</span>
+          <span className="brand-sub">Tuition Centre</span>
         </Link>
 
-        {/* Desktop Menu */}
-
-        <div className="hidden lg:flex items-center gap-8">
+        {/* DESKTOP */}
+        <div className="nav-links">
           {navbarLinks.map((item) => {
             if (item.children) {
               return (
-                <div key={item.label} className="relative group">
-                  <button className="flex items-center gap-1 font-medium text-gray-700 hover:text-[#8B1E2D] transition">
+                <div key={item.label} className="dropdown-wrap">
+                  <button className="nav-link">
                     {item.label}
-
-                    <ChevronDown size={18} />
+                    <ChevronDown size={14} />
                   </button>
 
-                  <div className="absolute top-10 hidden min-w-[260px] overflow-hidden rounded-[28px] border border-gray-200 bg-white shadow-2xl group-hover:block">
-                    {item.children.map((course) => (
+                  <div className="dropdown">
+                    {item.children.map((child) => (
                       <Link
-                        key={course.label}
-                        href={course.href}
-                        className="block px-6 py-4 text-sm transition hover:bg-red-50 hover:text-[#8B1E2D]"
+                        key={child.label}
+                        href={child.href}
+                        className="dropdown-item"
                       >
-                        {course.label}
+                        {child.label}
                       </Link>
                     ))}
                   </div>
@@ -65,88 +50,81 @@ export default function Navbar() {
               <Link
                 key={item.label}
                 href={item.href}
-                className={`relative font-medium transition
-                ${
-                  pathname === item.href
-                    ? "text-[#8B1E2D]"
-                    : "text-gray-700 hover:text-[#8B1E2D]"
-                }`}              >
+                className={`nav-link ${
+                  pathname === item.href ? "active" : ""
+                }`}
+              >
                 {item.label}
               </Link>
             );
           })}
 
-          <Link
-            href="/enquiry"
-            className="rounded-full bg-[#8B1E2D] px-6 py-3 text-sm font-semibold text-white hover:opacity-90 transition"
-          >
-            Enquire Now
+          <Link href="/enquiry" className="cta">
+            Admissions →
           </Link>
         </div>
 
-        {/* Mobile Button */}
-
+        {/* MOBILE */}
         <button
+          className="mobile-btn"
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="lg:hidden"
         >
-          {mobileOpen ? <X size={30} /> : <Menu size={30} />}
+          {mobileOpen ? <X /> : <Menu />}
         </button>
       </nav>
 
-      {/* Mobile Menu */}
-
+      {/* MOBILE MENU */}
       {mobileOpen && (
-        <div className="lg:hidden border-t border-gray-200 bg-white">
-          <div className="container-custom flex flex-col py-5">
-            {navbarLinks.map((item) => {
-              if (item.children) {
-                return (
-                  <div key={item.label}>
-                    <button
-                      onClick={() => setCourseOpen(!courseOpen)}
-                      className="flex w-full items-center justify-between py-3 font-medium"
-                    >
-                      {item.label}
-
-                      <ChevronDown size={18} />
-                    </button>
-
-                    {courseOpen && (
-                      <div className="pl-4">
-                        {item.children.map((course) => (
-                          <Link
-                            key={course.label}
-                            href={course.href}
-                            className="block py-2 text-sm text-gray-600"
-                          >
-                            {course.label}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                );
-              }
+        <div className="mobile">
+          {navbarLinks.map((item) => {
+            if (item.children) {
+              const open = openDropdown === item.label;
 
               return (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className="py-3 font-medium"
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
+                <div key={item.label}>
+                  <button
+                    className="mobile-item"
+                    onClick={() =>
+                      setOpenDropdown(open ? "" : item.label)
+                    }
+                  >
+                    {item.label}
+                    <ChevronDown
+                      className={open ? "rot" : ""}
+                      size={16}
+                    />
+                  </button>
 
-            <Link
-              href="/contact"
-              className="mt-4 rounded-full bg-[#8B1E2D] px-5 py-3 text-center text-white"
-            >
-              Enquire Now
-            </Link>
-          </div>
+                  {open && (
+                    <div className="mobile-sub">
+                      {item.children.map((child) => (
+                        <Link
+                          key={child.label}
+                          href={child.href}
+                        >
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            }
+
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="mobile-item"
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+
+          <Link href="/enquiry" className="mobile-cta">
+            Admissions →
+          </Link>
         </div>
       )}
     </header>

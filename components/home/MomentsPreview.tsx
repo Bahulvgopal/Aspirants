@@ -1,31 +1,55 @@
 import Link from "next/link";
+import Image from "next/image";
 import SectionHeading from "../shared/SectionHeading";
 import { gallery } from "@/data/gallery";
-import GalleryCard from "../gallery/GalleryCard";
 
 export default function MomentsPreview() {
+  const featured = gallery[0];
+  const sideImages = gallery.slice(1, 5);
+
   return (
-    <section className="section-padding">
+    <section className="moments-luxury section-padding">
       <div className="container-custom">
         <SectionHeading
           title="Aspire Moments"
           subtitle="Memories, activities and learning experiences."
         />
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {gallery.slice(0, 6).map((item) => (
-            <GalleryCard
-              key={item.id}
-              image={item.image}
-              title={item.title}
+        <div className="moments-masonry">
+          {/* Large Featured Image */}
+          <div className="moment-large">
+            <Image
+              src={featured.image}
+              alt={featured.title}
+              fill
+              className="moment-image"
+              sizes="(max-width: 1024px) 100vw, 60vw"
             />
-          ))}
+          </div>
+
+          {/* Side Images */}
+          <div className="moments-side">
+            {sideImages.map((item) => (
+              <div
+                key={item.id}
+                className="moment-small"
+              >
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  className="moment-image"
+                  sizes="(max-width: 640px) 100vw, 25vw"
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className="mt-10 text-center">
+        <div className="gallery-cta">
           <Link
             href="/gallery"
-            className="rounded-full bg-[#8B1E2D] px-7 py-4 text-white"
+            className="gallery-view-btn"
           >
             View Gallery
           </Link>

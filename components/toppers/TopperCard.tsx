@@ -4,7 +4,6 @@ import Image from "next/image";
 type Props = {
   topper: {
     name: string;
-    class: string;
     score: string;
     year: string;
     image: string;
@@ -28,10 +27,6 @@ export default function TopperCard({
         <h3 className="text-2xl font-bold text-[#8B1E2D]">
           {topper.name}
         </h3>
-
-        <p className="mt-2 text-gray-600">
-          {topper.class}
-        </p>
 
         <div className="mt-4 flex items-center justify-between">
           <span className="font-semibold text-black">

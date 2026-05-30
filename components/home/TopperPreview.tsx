@@ -6,32 +6,36 @@ import FadeUp from "../shared/FadeUp";
 
 export default function TopperPreview() {
   return (
-    <section className="section-padding bg-white">
+    <section className="topper-section">
       <div className="container-custom">
-        <SectionHeading
-          title="Top Achievers"
-          subtitle="Celebrating our students who achieved excellence."
-        />
+        <div className="topper-header">
+          <span className="topper-badge">
+            🏆 Excellence & Achievement
+          </span>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {toppers
-            .slice(0, 3)
-            .map((topper, index) => (
-              <FadeUp
-                key={topper.id}
-                delay={index * 0.1}
-              >
-                <TopperCard topper={topper} />
-              </FadeUp>
-            ))}
+          <SectionHeading
+            title="Top Achievers"
+            subtitle="Celebrating the outstanding performances of our students who set new benchmarks of success."
+          />
         </div>
 
-        <div className="mt-10 text-center">
-          <Link
-            href="/toppers"
-            className="rounded-full bg-[#8B1E2D] px-7 py-4 text-white"
-          >
-            View All Toppers
+        <div className="topper-grid">
+          {toppers.slice(0, 3).map((topper, index) => (
+            <FadeUp
+              key={topper.id}
+              delay={index * 0.15}
+            >
+              <div className="topper-card-wrapper">
+                <TopperCard topper={topper} />
+              </div>
+            </FadeUp>
+          ))}
+        </div>
+
+        <div className="topper-action">
+          <Link href="/toppers" className="topper-btn">
+            View All Achievers
+            <span>→</span>
           </Link>
         </div>
       </div>

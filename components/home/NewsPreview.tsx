@@ -3,39 +3,78 @@ import SectionHeading from "../shared/SectionHeading";
 import { news } from "@/data/news";
 
 export default function NewsPreview() {
+  const featured = news[0];
+  const sideNews = news.slice(1, 4);
+
   return (
-    <section className="section-padding bg-white">
+    <section className="news-premium-section section-padding">
       <div className="container-custom">
         <SectionHeading
-          title="Latest News"
-          subtitle="Stay updated with Aspire announcements."
+          title="Latest News & Updates"
+          subtitle="Stay informed with Aspire's achievements, announcements and academic milestones."
         />
 
-        <div className="grid gap-6 lg:grid-cols-3">
-          {news.map((item) => (
-            <div
-              key={item.id}
-              className="rounded-[28px] border border-gray-200 p-8"
-            >
-              <p className="text-sm text-gray-500">
-                {item.date}
-              </p>
-
-              <h3 className="mt-3 text-2xl font-bold text-[#8B1E2D]">
-                {item.title}
-              </h3>
-
-              <p className="mt-4 text-gray-600">
-                {item.description}
-              </p>
+        <div className="news-premium-grid">
+          {/* Featured News */}
+          <article className="featured-news-card">
+            <div className="featured-badge">
+              Featured Update
             </div>
-          ))}
+
+            <span className="featured-date">
+              {featured.date}
+            </span>
+
+            <h2 className="featured-title">
+              {featured.title}
+            </h2>
+
+            <p className="featured-description">
+              {featured.description}
+            </p>
+
+            <Link
+              href={`/news/${featured.id}`}
+              className="featured-button"
+            >
+              Read Full Story →
+            </Link>
+          </article>
+
+          {/* Side News */}
+          <div className="side-news-wrapper">
+            {sideNews.map((item) => (
+              <article
+                key={item.id}
+                className="side-news-card"
+              >
+                <span className="side-date">
+                  {item.date}
+                </span>
+
+                <h3 className="side-title">
+                  {item.title}
+                </h3>
+
+                <p className="side-description">
+                  {item.description}
+                </p>
+
+                <Link
+                  href={`/news/${item.id}`}
+                  className="side-link"
+                >
+                  Explore →
+                </Link>
+              </article>
+            ))}
+          </div>
         </div>
 
-        <div className="mt-10 text-center">
+        <div className="news-footer">
           <Link
             href="/news"
-            className="rounded-full bg-[#8B1E2D] px-7 py-4 text-white"
+            className="view-all-news-btn"
           >
             View All News
           </Link>

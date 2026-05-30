@@ -3,18 +3,26 @@ export const navbarLinks = [
     label: "Home",
     href: "/",
   },
+
   {
     label: "About",
-    href: "/about",
+    href: "#",
+    children: [
+      {
+        label: "About Us",
+        href: "/about",
+      },
+      {
+        label: "Gallery",
+        href: "/gallery",
+      },
+      {
+        label: "Toppers",
+        href: "/toppers",
+      },
+    ],
   },
-  // {
-  //   label: "Moments",
-  //   href: "/moments",
-  // },
-  {
-    label: "Toppers",
-    href: "/toppers",
-  },
+
   {
     label: "Courses",
     href: "#",
@@ -36,26 +44,8 @@ export const navbarLinks = [
         href: "/courses/codex",
       },
       {
-        label: "Aspire Science",
-        href: "#",
-        children: [
-          {
-            label: "Chemistry",
-            href: "/courses/science/chemistry",
-          },
-          {
-            label: "Physics",
-            href: "/courses/science/physics",
-          },
-          {
-            label: "Biology",
-            href: "/courses/science/biology",
-          },
-          {
-            label: "Mathematics",
-            href: "/courses/science/mathematics",
-          },
-        ],
+        label: "Aspire Science Laboratory",
+        href: "/courses/science",
       },
       {
         label: "Value Space",
@@ -67,14 +57,12 @@ export const navbarLinks = [
       },
     ],
   },
+
   {
     label: "News",
     href: "/news",
   },
-  {
-    label: "Gallery",
-    href: "/gallery",
-  },
+
   {
     label: "Contact",
     href: "/contact",

@@ -16,4 +16,22 @@ export const toppers = [
     rank: "AIR 82",
     score: "705/720",
   },
+
+  {
+    id: "3",
+    name: "Priya Patel",
+    image: "/toppers/ariyan.webp",
+    year: "2024",
+    rank: "AIR 82",
+    score: "705/720",
+  },
+
+  {
+    id: "4",
+    name: "Priya Patel",
+    image: "/toppers/priya.jpg",
+    year: "2024",
+    rank: "AIR 82",
+    score: "705/720",
+  },
 ];

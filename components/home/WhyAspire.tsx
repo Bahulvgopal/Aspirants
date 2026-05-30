@@ -26,31 +26,26 @@ const reasons = [
 
 export default function WhyAspire() {
   return (
-    <section className="section-padding bg-[#faf8f5]">
+    <section className="why-aspire section-padding">
       <div className="container-custom">
         <SectionHeading
           title="Why Aspire?"
           subtitle="Helping students become confident, disciplined and future-ready learners."
         />
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {reasons.map((reason, index) => (
-            <FadeUp
-              key={reason.title}
-              delay={index * 0.08}
-            >
-              <div className="rounded-[32px] border border-gray-200 bg-white p-8 transition hover:-translate-y-2 hover:shadow-xl">
-                <h3 className="text-xl font-bold text-[#8B1E2D]">
-                  {reason.title}
-                </h3>
-
-                <p className="mt-4 text-gray-600 leading-7">
-                  {reason.description}
-                </p>
+        <FadeUp>
+          <div className="aspire-grid">
+            {reasons.map((reason) => (
+              <div
+                key={reason.title}
+                className="aspire-item"
+              >
+                <h3>{reason.title}</h3>
+                <p>{reason.description}</p>
               </div>
-            </FadeUp>
-          ))}
-        </div>
+            ))}
+          </div>
+        </FadeUp>
       </div>
     </section>
   );
