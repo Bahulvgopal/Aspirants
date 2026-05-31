@@ -43,7 +43,7 @@ export const courses = [
 
   {
     slug: "waves-space",
-    title: "Waver Space",
+    title: "Waves Space",
     subtitle: "Creative Learning Space",
     layout: "waver",
   },

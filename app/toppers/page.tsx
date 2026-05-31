@@ -59,53 +59,7 @@ export default function ToppersPage() {
       </section>
 
       {/* ── FEATURED TOPPER ── */}
-      <section className="featured-section">
-        <div className="page-container">
-          <div className="featured-card">
-            <div className="featured-strip" aria-hidden />
-
-            <div className="featured-layout">
-              <div className="featured-info">
-                <span className="tag tag-primary">Year Topper</span>
-                <h2 className="featured-name">Aryan Sharma</h2>
-                <p className="featured-desc">
-                  Secured AIR&nbsp;14 in JEE Advanced 2024 with an exceptional
-                  score of 342/360 — a result of three years of focused
-                  preparation and expert mentorship at Aspire.
-                </p>
-
-                <div className="featured-stats-grid">
-                  <FeaturedStat label="School" value="GHSS Elampa"       highlight />
-                  <FeaturedStat label="Score"          value="342 / 360"    />
-                  <FeaturedStat label="Exam"           value="12 th" />
-                  <FeaturedStat label="Batch Year"     value="2024"         />
-                </div>
-
-                <div className="featured-actions">
-                  <a href="#achievers" className="btn-primary-sm">See All Achievers</a>
-                </div>
-              </div>
-
-              <div className="featured-visual-wrap">
-  <div className="featured-student-image">
-    <Image
-      src="/toppers/student1.jpg"
-      alt="Aryan Sharma"
-      fill
-      priority
-      className="featured-img"
-    />
-  </div>
-
-  {/* <div className="topper-badge text-white">
-  TOPPER
-</div> */}
-
-</div>
-            </div>
-          </div>
-        </div>
-      </section>
+     
 
       {/* ── ACHIEVERS GRID ── */}
       <section className="achievers-section" id="achievers">

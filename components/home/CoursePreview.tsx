@@ -13,11 +13,13 @@ const courseIcons = [
 
 const subjectTags = [
   ["Mathematics", "Science", "English"],
-  ["Physics", "Chemistry", "Biology"],
-  ["Computer Science", "IT Theory"],
-  ["Commerce", "Accounts", "Economics"],
-  ["Entrance Prep", "Mock Tests"],
+  ["Keam","NEET","JEE"],
+  ["Computer Fundamentals", "IT Theory"],
+  ["Biology","Physics","Chemistry","Mathematics"],
+  ["Compuer And digital skill"],
   ["All Subjects", "Crash Course"],
+  ["Digital learning library"],
+  ["photography", "Videography", "Editing"],
 ];
 
 export default function CoursePreview() {
@@ -136,7 +138,7 @@ export default function CoursePreview() {
 
         .stats-strip {
           display: flex;
-          border: 1.5px solid #fecaca;
+          border: 2.5px solid #f1e8e8;
           border-radius: 14px;
           overflow: hidden;
           margin-top: 2rem;
@@ -148,7 +150,7 @@ export default function CoursePreview() {
           align-items: center;
           padding: 1.1rem .5rem;
           background: #fff;
-          border-right: 1.5px solid #fecaca;
+          border: 2px solid #f1e8e8;
           gap: .2rem;
         }
         .stats-cell:last-child { border-right: none; }
