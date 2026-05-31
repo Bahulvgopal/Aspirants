@@ -128,7 +128,7 @@ export default function Hero() {
             <div className="hero-img-glow" aria-hidden />
 
             <Image
-              src="/images/hero-student.png"
+              src="/images/hero.jpg"
               alt="Aspire student studying"
               width={480}
               height={600}

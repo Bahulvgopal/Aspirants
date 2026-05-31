@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { navbarLinks } from "@/data/navbar";
@@ -37,25 +38,20 @@ export default function Navbar() {
         /* ── Brand ── */
         .brand {
           display: flex;
-          flex-direction: column;
-          line-height: 1;
+          align-items: center;
           text-decoration: none;
-          gap: 2px;
           flex-shrink: 0;
         }
-        .brand-title {
-          font-size: 1.15rem;
-          font-weight: 900;
-          letter-spacing: .18em;
-          color: #6B0119;
-          text-transform: uppercase;
+        .brand-logo {
+          height: 44px;
+          width: auto;
+          object-fit: contain;
+          display: block;
         }
-        .brand-sub {
-          font-size: .58rem;
-          font-weight: 600;
-          letter-spacing: .22em;
-          text-transform: uppercase;
-          color: #a3424f;
+        @media (max-width: 768px) {
+          .brand-logo {
+            height: 36px;
+          }
         }
 
         /* ── Desktop links ── */
@@ -100,7 +96,7 @@ export default function Navbar() {
           border-radius: 2px;
         }
 
-        /* ── Dropdown (JS-controlled) ── */
+        /* ── Dropdown ── */
         .dropdown-wrap {
           position: relative;
         }
@@ -162,7 +158,6 @@ export default function Navbar() {
         .dropdown-item.active-child { color: #6B0119; font-weight: 600; }
         .dropdown-item.active-child::before { background: #6B0119; }
 
-        /* click-outside overlay */
         .nav-overlay {
           position: fixed;
           inset: 0;
@@ -283,7 +278,6 @@ export default function Navbar() {
         }
       `}</style>
 
-      {/* Click-outside overlay to close dropdown */}
       {activeDropdown && (
         <div className="nav-overlay" onClick={() => setActiveDropdown("")} />
       )}
@@ -291,10 +285,16 @@ export default function Navbar() {
       <header className="nav">
         <nav className="nav-inner">
 
-          {/* Brand */}
+          {/* Brand — logo image */}
           <Link href="/" className="brand">
-            <span className="brand-title">Aspire</span>
-            <span className="brand-sub">Tuition Centre</span>
+            <Image
+              src="/images/asplogo.png"
+              alt="Aspire Tuition Centre"
+              width={2000}
+              height={50}
+              className="brand-logo"
+              priority
+            />
           </Link>
 
           {/* Desktop */}
@@ -302,7 +302,6 @@ export default function Navbar() {
             {navbarLinks.map((item) => {
               if (item.children) {
                 const isOpen = activeDropdown === item.label;
-                // highlight parent if any child matches current path
                 const isParentActive = item.children.some((c) => c.href === pathname);
 
                 return (

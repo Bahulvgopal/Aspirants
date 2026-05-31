@@ -361,6 +361,42 @@ body {
   80%      { transform: translateX(-50%) translateY(14px); opacity: 0; }
 }
 
+.featured-student-image {
+  position: relative;
+  width: 360px;
+  height: 440px;
+  border-radius: 36px;
+  overflow: hidden;
+  background: #f4f4f4;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.08);
+}
+
+.featured-img {
+  object-fit: cover;
+}
+
+.featured-student-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+ 
+}
+
+/* .topper-badge {
+  position: absolute;
+  top: 60px;
+  left: 140px;
+  color: white;
+
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  
+
+  z-index: 10;
+} */
 /* ── Stats Band ── */
 .stats-section {
   padding-block: 56px;

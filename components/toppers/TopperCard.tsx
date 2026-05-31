@@ -16,8 +16,7 @@ export default function TopperCard({ topper }: { topper: Topper }) {
   return (
     <>
       <div className="tc-card">
-        {/* Exam badge */}
-        <span className="tc-exam-badge">{topper.exam}</span>
+        
 
         {/* Photo */}
         <div className="tc-photo-wrap">
@@ -34,13 +33,10 @@ export default function TopperCard({ topper }: { topper: Topper }) {
         {/* Info */}
         <div className="tc-info">
           <p className="tc-name">{topper.name}</p>
-          {topper.college && <p className="tc-college">{topper.college}</p>}
+         
 
           <div className="tc-stats">
-            <div className="tc-stat">
-              <span className="tc-stat-value">{topper.rank}</span>
-              <span className="tc-stat-label">Rank</span>
-            </div>
+           
             <div className="tc-stat-divider" />
             <div className="tc-stat">
               <span className="tc-stat-value">{topper.score}</span>

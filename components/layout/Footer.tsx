@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { contactInfo } from "@/data/contact";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -35,18 +36,28 @@ export default function Footer() {
           >
             {/* Brand */}
             <div>
-              <h2
-                style={{
-                  fontSize: "22px",
-                  fontWeight: 500,
-                  color: "#ffffff",
-                  margin: "0 0 4px",
-                  letterSpacing: "-0.01em",
-                }}
-              >
-                Aspire{" "}
-                <span style={{ color: "rgba(255,255,255,0.7)" }}>Tuition</span>
-              </h2>
+             <Link
+  href="/"
+  className="brand"
+  style={{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-start",
+  }}
+>
+  <Image
+    src="/images/aspt.png"
+    alt="Aspire Tuition Centre"
+    width={70}
+    height={70}
+    priority
+    style={{
+      display: "block",
+      objectFit: "contain",
+      marginRight: "auto",
+    }}
+  />
+</Link>
 
               <p
                 style={{

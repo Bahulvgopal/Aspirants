@@ -29,10 +29,10 @@ export default function MomentsPreview() {
 
           {/* Side Images */}
           <div className="moments-side">
-            {sideImages.map((item) => (
+            {sideImages.map((item, index) => (
               <div
                 key={item.id}
-                className="moment-small"
+                className={`moment-small${index >= 2 ? " moment-small--hide-mobile" : ""}`}
               >
                 <Image
                   src={item.image}
@@ -55,6 +55,14 @@ export default function MomentsPreview() {
           </Link>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .moment-small--hide-mobile {
+            display: none;
+          }
+        }
+      `}</style>
     </section>
   );
 }
