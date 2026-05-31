@@ -8,6 +8,7 @@ import FaqSection from "@/components/home/FaqSection";
 import WhyAspire from "@/components/home/WhyAspire";
 import Testimonials from "@/components/home/Testimonials";
 import AdmissionCTA from "@/components/home/AdmissionCTA";
+import WhatsappFloat from "@/components/layout/WhatsappFloat";
 
 export default function HomePage() {
   return (
@@ -22,6 +23,7 @@ export default function HomePage() {
       <Testimonials />
       <FaqSection />
       <AdmissionCTA />
+      <WhatsappFloat/>
     </>
   );
 }
