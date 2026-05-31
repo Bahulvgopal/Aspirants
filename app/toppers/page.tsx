@@ -6,7 +6,6 @@ import SectionHeading from "@/components/shared/SectionHeading";
 import TopperCard from "@/components/toppers/TopperCard";
 import StatCard from "@/components/toppers/StatCard";
 import { toppers } from "@/data/toppers";
-import Image from "next/image";
 
 const stagger = {
   hidden: {},
@@ -20,6 +19,10 @@ const cardVariant = {
     transition: { duration: 0.38, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
   },
 };
+
+const sortedToppers = [...toppers].sort(
+  (a, b) => Number(b.year ?? 0) - Number(a.year ?? 0)
+);
 
 export default function ToppersPage() {
   return (
@@ -52,14 +55,10 @@ export default function ToppersPage() {
       <section className="stats-section">
         <div className="page-container stats-grid">
           <StatCard value="1200+" label="Total Selections" />
-          
           <StatCard value="18"    label="Full A+" />
-          <StatCard value="98%"   label="Success Rate"     />
+          <StatCard value="98%"   label="Success Rate" />
         </div>
       </section>
-
-      {/* ── FEATURED TOPPER ── */}
-     
 
       {/* ── ACHIEVERS GRID ── */}
       <section className="achievers-section" id="achievers">
@@ -76,14 +75,13 @@ export default function ToppersPage() {
             <div className="section-header-line" aria-hidden />
           </div>
 
-          {/* Grid — all toppers, no filter */}
           <motion.div
             className="toppers-grid"
             variants={stagger}
             initial="hidden"
             animate="show"
           >
-            {toppers.map((topper) => (
+            {sortedToppers.map((topper) => (
               <motion.div
                 key={topper.id}
                 variants={cardVariant}
@@ -97,22 +95,5 @@ export default function ToppersPage() {
       </section>
 
     </main>
-  );
-}
-
-function FeaturedStat({
-  label,
-  value,
-  highlight = false,
-}: {
-  label: string;
-  value: string;
-  highlight?: boolean;
-}) {
-  return (
-    <div className={`fstat-pill${highlight ? " fstat-pill-highlight" : ""}`}>
-      <p className="fstat-label">{label}</p>
-      <p className="fstat-value">{value}</p>
-    </div>
   );
 }
