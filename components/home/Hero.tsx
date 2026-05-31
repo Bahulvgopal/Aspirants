@@ -29,7 +29,7 @@ export default function Hero() {
         <div className="hero-bg-blob hero-bg-blob-2" />
         <div className="hero-bg-grid" />
         {/* vertical rule — editorial accent */}
-        <div className="hero-bg-vline" />
+        <div className="hero-bg-hline" />
       </div>
 
       <div className="container-custom hero-layout">
@@ -113,7 +113,7 @@ export default function Hero() {
           >
             <span className="hero-float-badge-icon">🏆</span>
             <div>
-              <p className="hero-float-badge-title">98% Success Rate</p>
+              <p className="hero-float-badge-title">100% Success Rate</p>
               <p className="hero-float-badge-sub">Last 3 years combined</p>
             </div>
           </motion.div>
@@ -144,31 +144,19 @@ export default function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.9, duration: 0.5 }}
           >
+             <p className="hero-float-badge-sub" style={{ marginTop: 6 }}>Exams we prepare for</p>
             <div className="hero-exam-tags">
               {["JEE", "NEET", "CBSE", "KEAM"].map((tag) => (
                 <span key={tag} className="hero-exam-tag">{tag}</span>
               ))}
             </div>
-            <p className="hero-float-badge-sub" style={{ marginTop: 6 }}>Exams we prepare for</p>
+           
           </motion.div>
 
         </motion.div>
 
       </div>
-              <br /><br /><br />
-      {/* ── bottom scroll indicator ─── */}
-      <motion.div
-        className="hero-scroll-indicator"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        aria-hidden
-      >
-        <div className="hero-scroll-track">
-          <div className="hero-scroll-thumb" />
-        </div>
-        <span>Scroll to explore</span>
-      </motion.div>
+      
     </section>
   );
 }
