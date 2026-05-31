@@ -44,7 +44,7 @@ export const navbarLinks = [
         href: "/courses/aspire-codex",
       },
       {
-        label: "Aspire Science Laboratory",
+        label: "Aspire Science",
         href: "/courses/aspire-science",
       },
       {
