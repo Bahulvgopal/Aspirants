@@ -6,7 +6,7 @@ export const news = [
       "Admissions are now open for Aspire Smart, Elite and Science programmes. Secure your seat today.",
     date: "2026-05-01 05:30 pm",
     category: "admissions",
-    image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&auto=format&fit=crop&q=80",
+    image: "/news/new3.png",
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ export const news = [
       "Hands-on chemistry and physics learning sessions introduced for all +2 students.",
     date: "2026-06-01 05:30 pm",
     category: "workshop",
-    image: "https://images.unsplash.com/photo-1532094349884-543559823397?w=800&auto=format&fit=crop&q=80",
+    image: "/news/new2.png",
   },
   {
     id: 3,
@@ -24,7 +24,7 @@ export const news = [
       "Special revision and mock exams for board students starting this month.",
     date: "2026-06-02 01:30 am",
     category: "exams",
-    image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&auto=format&fit=crop&q=80",
+    image: "/news/new1.png",
   },
 ];
 
