@@ -118,7 +118,7 @@ export default function AboutPage() {
             {/* Image */}
             <div className="about-img-wrap">
               <Image
-                src="/images/about.jpg"
+                src="/images/W.jpeg"
                 alt="Students at Aspire Tuition Centre"
                 width={700}
                 height={500}
