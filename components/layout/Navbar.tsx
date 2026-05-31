@@ -9,6 +9,7 @@ import { usePathname } from "next/navigation";
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState("");
+  const [activeDropdown, setActiveDropdown] = useState("");
   const pathname = usePathname();
 
   return (
@@ -80,32 +81,47 @@ export default function Navbar() {
           cursor: pointer;
           transition: color .15s, background .15s;
           white-space: nowrap;
+          position: relative;
         }
         .nav-link:hover { color: #6B0119; background: #fdf0f2; }
-        .nav-link.active { color: #6B0119; font-weight: 700; }
+        .nav-link.active {
+          color: #6B0119;
+          font-weight: 700;
+        }
+        .nav-link.active::after {
+          content: '';
+          position: absolute;
+          bottom: -1px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 20px;
+          height: 2px;
+          background: #6B0119;
+          border-radius: 2px;
+        }
 
-        /* ── Dropdown ── */
+        /* ── Dropdown (JS-controlled) ── */
         .dropdown-wrap {
           position: relative;
         }
-        .dropdown-wrap:hover .dropdown { opacity: 1; pointer-events: auto; transform: translateY(0); }
-        .dropdown-wrap:hover > .nav-link { color: #6B0119; background: #fdf0f2; }
 
         .dropdown {
           position: absolute;
-          top: calc(100% + 8px);
+          top: calc(100% + 10px);
           left: 50%;
-          transform: translateX(-50%) translateY(-6px);
+          transform: translateX(-50%);
           background: #fff;
           border: 1px solid #f0e0e3;
           border-radius: 14px;
           padding: .5rem;
-          min-width: 210px;
-          box-shadow: 0 12px 36px -8px rgba(107,1,25,0.12);
-          opacity: 0;
-          pointer-events: none;
-          transition: opacity .18s, transform .18s;
+          min-width: 220px;
+          box-shadow: 0 16px 40px -8px rgba(107,1,25,0.14);
           z-index: 200;
+          animation: dropIn .16s ease;
+        }
+        @keyframes dropIn {
+          from { opacity: 0; transform: translateX(-50%) translateY(-6px); }
+          to   { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
         .dropdown::before {
           content: '';
@@ -143,6 +159,15 @@ export default function Navbar() {
         }
         .dropdown-item:hover { background: #fdf0f2; color: #6B0119; }
         .dropdown-item:hover::before { background: #6B0119; }
+        .dropdown-item.active-child { color: #6B0119; font-weight: 600; }
+        .dropdown-item.active-child::before { background: #6B0119; }
+
+        /* click-outside overlay */
+        .nav-overlay {
+          position: fixed;
+          inset: 0;
+          z-index: 99;
+        }
 
         /* ── CTA ── */
         .cta {
@@ -208,6 +233,7 @@ export default function Navbar() {
           transition: color .15s;
         }
         .mobile-item:hover { color: #6B0119; }
+        .mobile-item.active-mobile { color: #6B0119; font-weight: 700; }
 
         .mobile-sub {
           display: flex;
@@ -227,6 +253,11 @@ export default function Navbar() {
           transition: color .15s, background .15s;
         }
         .mobile-sub a:hover { color: #6B0119; background: #fdf0f2; }
+        .mobile-sub a.active-child-mobile {
+          color: #6B0119;
+          font-weight: 600;
+          background: #fdf0f2;
+        }
 
         .mobile-cta {
           display: flex;
@@ -246,13 +277,16 @@ export default function Navbar() {
         }
         .mobile-cta:hover { background: #530114; }
 
-        .rot { transform: rotate(180deg); transition: transform .2s; }
-
         @media (max-width: 768px) {
           .nav-links { display: none; }
           .mobile-btn { display: flex; }
         }
       `}</style>
+
+      {/* Click-outside overlay to close dropdown */}
+      {activeDropdown && (
+        <div className="nav-overlay" onClick={() => setActiveDropdown("")} />
+      )}
 
       <header className="nav">
         <nav className="nav-inner">
@@ -267,22 +301,44 @@ export default function Navbar() {
           <div className="nav-links">
             {navbarLinks.map((item) => {
               if (item.children) {
+                const isOpen = activeDropdown === item.label;
+                // highlight parent if any child matches current path
+                const isParentActive = item.children.some((c) => c.href === pathname);
+
                 return (
                   <div key={item.label} className="dropdown-wrap">
-                    <button className="nav-link">
+                    <button
+                      className={`nav-link${isParentActive ? " active" : ""}`}
+                      onClick={() => setActiveDropdown(isOpen ? "" : item.label)}
+                    >
                       {item.label}
-                      <ChevronDown size={13} />
+                      <ChevronDown
+                        size={13}
+                        style={{
+                          transform: isOpen ? "rotate(180deg)" : "none",
+                          transition: "transform .2s",
+                        }}
+                      />
                     </button>
-                    <div className="dropdown">
-                      {item.children.map((child) => (
-                        <Link key={child.label} href={child.href} className="dropdown-item">
-                          {child.label}
-                        </Link>
-                      ))}
-                    </div>
+
+                    {isOpen && (
+                      <div className="dropdown">
+                        {item.children.map((child) => (
+                          <Link
+                            key={child.label}
+                            href={child.href}
+                            className={`dropdown-item${pathname === child.href ? " active-child" : ""}`}
+                            onClick={() => setActiveDropdown("")}
+                          >
+                            {child.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 );
               }
+
               return (
                 <Link
                   key={item.label}
@@ -297,7 +353,11 @@ export default function Navbar() {
           </div>
 
           {/* Mobile toggle */}
-          <button className="mobile-btn" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
+          <button
+            className="mobile-btn"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+          >
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </nav>
@@ -308,19 +368,33 @@ export default function Navbar() {
             {navbarLinks.map((item) => {
               if (item.children) {
                 const open = openDropdown === item.label;
+                const isParentActive = item.children.some((c) => c.href === pathname);
+
                 return (
                   <div key={item.label}>
                     <button
-                      className="mobile-item"
+                      className={`mobile-item${isParentActive ? " active-mobile" : ""}`}
                       onClick={() => setOpenDropdown(open ? "" : item.label)}
                     >
                       {item.label}
-                      <ChevronDown size={15} style={{ transform: open ? "rotate(180deg)" : "none", transition: "transform .2s" }} />
+                      <ChevronDown
+                        size={15}
+                        style={{
+                          transform: open ? "rotate(180deg)" : "none",
+                          transition: "transform .2s",
+                          color: isParentActive ? "#6B0119" : undefined,
+                        }}
+                      />
                     </button>
                     {open && (
                       <div className="mobile-sub">
                         {item.children.map((child) => (
-                          <Link key={child.label} href={child.href} onClick={() => setMobileOpen(false)}>
+                          <Link
+                            key={child.label}
+                            href={child.href}
+                            className={pathname === child.href ? "active-child-mobile" : ""}
+                            onClick={() => setMobileOpen(false)}
+                          >
                             {child.label}
                           </Link>
                         ))}
@@ -329,18 +403,23 @@ export default function Navbar() {
                   </div>
                 );
               }
+
               return (
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="mobile-item"
+                  className={`mobile-item${pathname === item.href ? " active-mobile" : ""}`}
                   onClick={() => setMobileOpen(false)}
                 >
                   {item.label}
                 </Link>
               );
             })}
-            <Link href="/enquiry" className="mobile-cta" onClick={() => setMobileOpen(false)}>
+            <Link
+              href="/enquiry"
+              className="mobile-cta"
+              onClick={() => setMobileOpen(false)}
+            >
               Admissions →
             </Link>
           </div>

@@ -1,280 +1,259 @@
 // MomentsPage.tsx
+"use client";
+
+import { useState, useMemo } from "react";
 import { gallery } from "@/data/gallery";
+import GalleryCard from "@/components/gallery/GalleryCard";
+import { motion, AnimatePresence } from "framer-motion";
+import SectionHeading from "@/components/shared/SectionHeading";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+  },
+};
+
+const stagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.07, delayChildren: 0.02 } },
+};
+
+const cardVariant = {
+  hidden: { opacity: 0, scale: 0.97, y: 16 },
+  show: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+  },
+ exit: {
+  opacity: 0,
+  scale: 0.95,
+  y: -8,
+  transition: {
+    duration: 0.22,
+    ease: [0.42, 0, 1, 1] as [number, number, number, number],
+  },
+},
+};
+
+// Derive unique filter labels from the gallery data, prepend "All"
+const FILTERS = [
+  "All",
+  ...Array.from(new Set(gallery.map((i) => i.category).filter(Boolean))) as string[],
+];
 
 export default function MomentsPage() {
+  const [active, setActive] = useState("All");
+
+  const filtered = useMemo(
+    () => (active === "All" ? gallery : gallery.filter((i) => i.category === active)),
+    [active]
+  );
+
   return (
-    <>
+    <section className="moments-section section-padding">
+      <div className="container-custom">
+
+        {/* Heading */}
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={fadeUp}
+        >
+          <SectionHeading
+            title="Aspire Moments"
+            subtitle="A glimpse into student life, learning milestones, and achievements."
+          />
+        </motion.div>
+
+        {/* Eyebrow + filters row */}
+        <motion.div
+          className="moments-meta"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={fadeUp}
+        >
+          <div className="moments-eyebrow">
+            <span className="moments-eyebrow-dot" aria-hidden />
+            <span>
+              {filtered.length} {filtered.length === 1 ? "moment" : "moments"}
+              {active !== "All" ? ` in ${active}` : " captured"}
+            </span>
+          </div>
+
+          <div className="moments-filters" role="group" aria-label="Filter gallery">
+            {FILTERS.map((f) => (
+              <button
+                key={f}
+                onClick={() => setActive(f)}
+                className={`moments-filter-pill${active === f ? " active" : ""}`}
+                aria-pressed={active === f}
+              >
+                {f}
+              </button>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Grid with AnimatePresence so cards animate out/in on filter change */}
+        <motion.div
+          className="moments-grid"
+          variants={stagger}
+          initial="hidden"
+          animate="show"
+        >
+          <AnimatePresence mode="popLayout">
+            {filtered.map((item) => (
+              <motion.div
+                key={item.id}
+                variants={cardVariant}
+                initial="hidden"
+                animate="show"
+                exit="exit"
+                layout
+                className="moments-grid-item"
+              >
+                <GalleryCard
+                  image={item.image}
+                  title={item.title}
+                  category={item.category}
+                />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+
+        {/* Empty state */}
+        {filtered.length === 0 && (
+          <motion.p
+            className="moments-empty"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          >
+            No moments found for &ldquo;{active}&rdquo;.
+          </motion.p>
+        )}
+
+        {/* Footer CTA */}
+       
+
+      </div>
+
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap');
-
-        .moments-root {
-          padding: 5rem 1.5rem 4rem;
-          font-family: 'DM Sans', sans-serif;
-          position: relative;
-        }
-
-        .moments-root::before {
-          content: '';
-          position: absolute;
-          top: 0; left: 0; right: 0;
-          height: 1px;
-          background: linear-gradient(90deg, transparent, #00000020 30%, #00000020 70%, transparent);
-        }
-
-        .moments-container {
-          max-width: 1160px;
-          margin: 0 auto;
-        }
-
-        .moments-label {
-          font-size: 11px;
-          font-weight: 500;
-          letter-spacing: 0.2em;
-          text-transform: uppercase;
-          color: #999;
-          margin-bottom: 0.75rem;
-        }
-
-        .moments-title {
-          font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(2.4rem, 5vw, 3.5rem);
-          font-weight: 300;
-          line-height: 1.05;
-          margin: 0 0 0.5rem;
-          letter-spacing: -0.01em;
-          color: #111;
-        }
-
-        .moments-title em {
-          font-style: italic;
-          font-weight: 400;
-        }
-
-        .moments-subtitle {
-          font-size: 14px;
-          font-weight: 300;
-          color: #666;
-          margin: 0 0 3rem;
-          max-width: 380px;
-          line-height: 1.7;
-        }
-
-        /* Grid */
-        .moments-grid {
-          display: grid;
-          grid-template-columns: repeat(12, 1fr);
-          gap: 1px;
-          background: #e0e0e0;
-          border: 1px solid #e0e0e0;
-          border-radius: 12px;
-          overflow: hidden;
-          animation: momentsGridFade 0.5s 0.28s ease backwards;
-        }
-
-        /* Cards */
-        .moments-card {
-          position: relative;
-          overflow: hidden;
-          cursor: pointer;
-          background: #fff;
-          min-height: 180px;
-        }
-
-        .moments-card:nth-child(1) { grid-column: span 7; grid-row: span 2; min-height: 360px; }
-        .moments-card:nth-child(2) { grid-column: span 5; }
-        .moments-card:nth-child(3) { grid-column: span 5; }
-        .moments-card:nth-child(4) { grid-column: span 4; min-height: 240px; }
-        .moments-card:nth-child(5) { grid-column: span 4; }
-        .moments-card:nth-child(6) { grid-column: span 4; }
-
-        .moments-card-bg {
-          position: absolute;
-          inset: 0;
-          transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .moments-card:hover .moments-card-bg {
-          transform: scale(1.04);
-        }
-
-        .moments-card-img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-        .moments-card-placeholder {
-          width: 100%;
-          height: 100%;
-          background: #ece8e2;
-        }
-
-        .moments-card-overlay {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(180deg, transparent 30%, rgba(0,0,0,0.7) 100%);
-          opacity: 0;
-          transition: opacity 0.4s ease;
-        }
-
-        .moments-card:hover .moments-card-overlay {
-          opacity: 1;
-        }
-
-        .moments-card-title-static {
-          position: absolute;
-          bottom: 1rem;
-          left: 1.25rem;
-          right: 1.25rem;
-          font-family: 'Cormorant Garamond', serif;
-          font-size: 1rem;
-          font-weight: 400;
-          color: #555;
-          margin: 0;
-          transition: opacity 0.3s;
-        }
-
-        .moments-card:hover .moments-card-title-static {
-          opacity: 0;
-        }
-
-        .moments-card-content {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          padding: 1.25rem 1.5rem;
-          transform: translateY(6px);
-          opacity: 0;
-          transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .moments-card:hover .moments-card-content {
-          transform: translateY(0);
-          opacity: 1;
-        }
-
-        .moments-card-tag {
-          display: block;
-          font-size: 10px;
-          font-weight: 500;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
-          color: rgba(255,255,255,0.65);
-          margin-bottom: 4px;
-        }
-
-        .moments-card-title {
-          font-family: 'Cormorant Garamond', serif;
-          font-size: 1.25rem;
-          font-weight: 400;
-          color: #fff;
-          margin: 0;
-          line-height: 1.25;
-        }
-
-        /* Footer */
-        .moments-footer {
+        .moments-meta {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          margin-top: 2rem;
-          padding-top: 1.5rem;
-          border-top: 0.5px solid #e8e8e8;
-          animation: momentsGridFade 0.5s 0.36s ease backwards;
+          flex-wrap: wrap;
+          gap: 12px;
+          margin-bottom: 2rem;
         }
 
-        .moments-count {
-          font-size: 11px;
-          color: #aaa;
-          letter-spacing: 0.05em;
-        }
-
-        .moments-view-all {
-          font-family: 'DM Sans', sans-serif;
+        .moments-eyebrow {
+          display: flex;
+          align-items: center;
+          gap: 8px;
           font-size: 12px;
           font-weight: 500;
-          letter-spacing: 0.08em;
+          letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: #111;
-          border: 0.5px solid #ccc;
+          color: #999;
+          transition: color 0.2s;
+        }
+
+        .moments-eyebrow-dot {
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background: #8B1E2D;
+          display: inline-block;
+          flex-shrink: 0;
+        }
+
+        .moments-filters {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+        }
+
+        .moments-filter-pill {
+          font-size: 12px;
+          font-weight: 500;
+          letter-spacing: 0.04em;
+          padding: 6px 14px;
+          border-radius: 999px;
+          border: 1px solid #ddd;
           background: transparent;
-          padding: 8px 20px;
-          border-radius: 100px;
+          color: #666;
           cursor: pointer;
-          transition: background 0.25s ease;
+          transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
         }
 
-        .moments-view-all:hover {
-          background: #f4f4f2;
+        .moments-filter-pill:hover {
+          border-color: #8B1E2D;
+          color: #8B1E2D;
         }
 
-        /* Animations */
-        @keyframes momentsGridFade {
-          from { opacity: 0; transform: translateY(16px); }
-          to   { opacity: 1; transform: translateY(0); }
+        .moments-filter-pill.active {
+          background: #8B1E2D;
+          border-color: #8B1E2D;
+          color: #fff;
         }
 
-        .moments-label    { animation: momentsGridFade 0.5s 0.05s ease backwards; }
-        .moments-title    { animation: momentsGridFade 0.5s 0.12s ease backwards; }
-        .moments-subtitle { animation: momentsGridFade 0.5s 0.18s ease backwards; }
+        .moments-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
+        }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-          .moments-card:nth-child(1),
-          .moments-card:nth-child(2),
-          .moments-card:nth-child(3),
-          .moments-card:nth-child(4),
-          .moments-card:nth-child(5),
-          .moments-card:nth-child(6) {
-            grid-column: span 12;
-            min-height: 200px;
+        /* Wide cards only when showing "All" unfiltered — nth-child still works */
+        .moments-grid-item:nth-child(1),
+        .moments-grid-item:nth-child(5),
+        .moments-grid-item:nth-child(8) {
+          grid-column: span 2;
+        }
+
+        @media (max-width: 900px) {
+          .moments-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+          .moments-grid-item:nth-child(1),
+          .moments-grid-item:nth-child(5),
+          .moments-grid-item:nth-child(8) {
+            grid-column: span 2;
           }
         }
+
+        @media (max-width: 560px) {
+          .moments-grid {
+            grid-template-columns: 1fr;
+          }
+          .moments-grid-item {
+            grid-column: span 1 !important;
+          }
+        }
+
+        .moments-empty {
+          text-align: center;
+          color: #aaa;
+          font-size: 14px;
+          padding: 3rem 0;
+        }
+
+        .moments-footer {
+          display: flex;
+          justify-content: center;
+          margin-top: 2.5rem;
+          padding-top: 2rem;
+          border-top: 1px solid #f0f0f0;
+        }
       `}</style>
-
-      <section className="moments-root">
-        <div className="moments-container">
-          <p className="moments-label">Student Life</p>
-          <h1 className="moments-title">
-            Aspire <em>Moments</em>
-          </h1>
-          <p className="moments-subtitle">
-            A glimpse into student life, learning, and achievements.
-          </p>
-
-          <div className="moments-grid">
-            {gallery.map((item) => (
-              <div key={item.id} className="moments-card">
-                <div className="moments-card-bg">
-                  {item.image ? (
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="moments-card-img"
-                    />
-                  ) : (
-                    <div className="moments-card-placeholder" />
-                  )}
-                </div>
-                <div className="moments-card-overlay" />
-                <p className="moments-card-title-static">{item.title}</p>
-                <div className="moments-card-content">
-                  <span className="moments-card-tag">
-                    {item.category ?? "Moment"}
-                  </span>
-                  <p className="moments-card-title">{item.title}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="moments-footer">
-            <span className="moments-count">{gallery.length} moments captured</span>
-            <button className="moments-view-all">View all →</button>
-          </div>
-        </div>
-      </section>
-    </>
+    </section>
   );
 }

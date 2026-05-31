@@ -1,21 +1,24 @@
-import { chatbotKnowledge } from "@/data/chatbotKnowledge";
-
-export function getChatbotResponse(
-  userInput: string
+export async function getChatbotResponse(
+  message: string
 ) {
-  const normalizedInput =
-    userInput.toLowerCase();
+  try {
+    const response = await fetch("/api/chat", {
+      method: "POST",
 
-  const matched =
-    chatbotKnowledge.find((item) =>
-      item.keywords.some((keyword) =>
-        normalizedInput.includes(
-          keyword.toLowerCase()
-        )
-      )
-    );
+      headers: {
+        "Content-Type":
+          "application/json",
+      },
 
-  return matched
-    ? matched.answer
-    : "Sorry, I couldn't understand that. Please contact Aspire for detailed assistance.";
+      body: JSON.stringify({
+        message,
+      }),
+    });
+
+    const data = await response.json();
+
+    return data.reply;
+  } catch (error) {
+    return "Something went wrong. Please try again.";
+  }
 }

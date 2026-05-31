@@ -265,7 +265,7 @@ export default function CoursePreview() {
                     lineHeight: 1.75,
                     margin: "0 0 1rem",
                   }}>
-                    {course.shortDescription}
+                    {course.subtitle}
                   </p>
 
                   {/* Tags */}

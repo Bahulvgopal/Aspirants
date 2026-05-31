@@ -29,31 +29,35 @@ export const navbarLinks = [
     children: [
       {
         label: "Aspire Next",
-        href: "/courses/next",
+        href: "/courses/aspire-next",
       },
       {
         label: "Aspire Elite",
-        href: "/courses/elite",
+        href: "/courses/aspire-elite",
       },
       {
         label: "Aspire Smart",
-        href: "/courses/smart",
+        href: "/courses/aspire-smart",
       },
       {
         label: "Aspire Codex",
-        href: "/courses/codex",
+        href: "/courses/aspire-codex",
       },
       {
         label: "Aspire Science Laboratory",
-        href: "/courses/science",
+        href: "/courses/aspire-science",
       },
       {
-        label: "Value Space",
-        href: "/courses/value-space",
+        label: "Aspire Marathon",
+        href: "/courses/aspire-marathon",
+      },
+      {
+        label: "waves Space",
+        href: "/courses/waves-space",
       },
       {
         label: "Shutter Studio",
-        href: "/courses/shutter-studio",
+        href: "/courses/aspire-shutter-studio",
       },
     ],
   },

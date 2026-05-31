@@ -6,8 +6,9 @@ export const toppers = [
     year: "2024",
     rank: "AIR 14",
     score: "342/360",
+    exam: "JEE Advanced",
+    college: "IIT Bombay",
   },
-
   {
     id: "2",
     name: "Priya Patel",
@@ -15,23 +16,27 @@ export const toppers = [
     year: "2024",
     rank: "AIR 82",
     score: "705/720",
+    exam: "NEET",
+    college: "AIIMS Delhi",
   },
-
   {
     id: "3",
-    name: "Priya Patel",
+    name: "Rahul Nair",
     image: "/toppers/ariyan.webp",
     year: "2024",
-    rank: "AIR 82",
-    score: "705/720",
+    rank: "AIR 210",
+    score: "298/300",
+    exam: "JEE Mains",
+    college: "NIT Trichy",
   },
-
   {
     id: "4",
-    name: "Priya Patel",
+    name: "Sneha Krishnan",
     image: "/toppers/priya.jpg",
     year: "2024",
-    rank: "AIR 82",
-    score: "705/720",
+    rank: "AIR 44",
+    score: "710/720",
+    exam: "AIIMS",
+    college: "AIIMS Jodhpur",
   },
 ];
