@@ -21,14 +21,7 @@ const wavesFeatures = [
   { Icon: FaTrophy,           title: "Competitive Level Questions", desc: "Competitive level questions for advanced practice and higher-order thinking" },
 ];
 
-const shutterFeatures = [
-  "Official student media and creative team of ASPIRE",
-  "Covers events, programmes, and academic activities",
-  "Involvement in photography, videography, and editing",
-  "Encourages teamwork, creativity, and responsibility",
-  "Opportunity to work on real-time projects",
-  "Platform to showcase and develop creative talent",
-];
+
 
 const allKfItems = wavesFeatures.map(f => `${f.title} — ${f.desc}`);
 
@@ -60,7 +53,7 @@ export default function WavesSpacePage() {
           </p>
 
           <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-            {["Study Materials", "Flashcards", "Mind Maps", "NCERT Practice", "Shutter Studio"].map(label => (
+            {["Study Materials", "Flashcards", "Mind Maps", "NCERT Practice",].map(label => (
               <span key={label} style={{
                 display: "inline-flex", alignItems: "center", gap: 6,
                 background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)",
@@ -127,50 +120,7 @@ export default function WavesSpacePage() {
         </div>
       </section>
 
-      {/* ── SHUTTER STUDIO ── */}
-      <section style={{ padding: "64px 24px", background: "#fff" }}>
-        <div style={{ maxWidth: 960, margin: "0 auto" }}>
-          <p style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 3, color: CRIMSON, marginBottom: 8 }}>Student Media Programme</p>
-          <h2 style={{ fontSize: "clamp(26px,4vw,36px)", fontWeight: 900, color: "#1a0006", marginBottom: 12 }}>
-            Aspire <span style={{ color: CRIMSON }}>Shutter Studio</span>
-          </h2>
-          <div style={{ width: 52, height: 4, background: CRIMSON, borderRadius: 4, marginBottom: 32 }} />
-
-          <div style={{
-            background: `linear-gradient(135deg, ${CRIMSON_DARK} 0%, ${CRIMSON_MID} 50%, ${CRIMSON} 100%)`,
-            borderRadius: 20, padding: "48px 40px", color: "#fff", position: "relative", overflow: "hidden"
-          }}>
-            <div style={{ position: "absolute", top: -60, right: -60, width: 240, height: 240, borderRadius: "50%", background: "rgba(255,255,255,0.05)" }} />
-            <div style={{ display: "flex", alignItems: "flex-start", gap: 20, flexWrap: "wrap", marginBottom: 20 }}>
-              <div style={{
-                width: 72, height: 72, background: "rgba(255,255,255,0.15)", borderRadius: 16,
-                display: "flex", alignItems: "center", justifyContent: "center",
-                border: "1px solid rgba(255,255,255,0.2)", flexShrink: 0
-              }}>
-                <FaCamera size={30} color={PINK_ACCENT} />
-              </div>
-              <div>
-                <p style={{ fontSize: 10, color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: 3, fontWeight: 600, marginBottom: 4 }}>Official Student Media & Digital Skills Programme</p>
-                <h3 style={{ fontSize: "clamp(22px,4vw,30px)", fontWeight: 900, color: "#fff", lineHeight: 1 }}>
-                  Aspire <span style={{ color: PINK_ACCENT }}>Shutter Studio</span>
-                </h3>
-              </div>
-            </div>
-            <p style={{ fontSize: 14, color: "rgba(255,255,255,0.7)", lineHeight: 1.75, marginBottom: 28, maxWidth: 640 }}>
-              Aspire Shutter Studio is the official student media team at ASPIRE. It provides a platform for students with an interest in photography, videography, editing and digital content creation to actively contribute and showcase their skills.
-            </p>
-            <p style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 3, color: PINK_ACCENT, marginBottom: 16 }}>Key Features</p>
-            <ul style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, listStyle: "none", padding: 0 }}>
-              {shutterFeatures.map((f, i) => (
-                <li key={i} style={{ display: "flex", alignItems: "flex-start", gap: 8, fontSize: 13, color: "rgba(255,255,255,0.82)", lineHeight: 1.5 }}>
-                  <FaCircleCheck size={14} color={PINK_ACCENT} style={{ marginTop: 2, flexShrink: 0 }} />
-                  <span>{f}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
+      
 
       {/* ── FOOTER ── */}
       

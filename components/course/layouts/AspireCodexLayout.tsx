@@ -435,21 +435,22 @@ export default function AspireCodexPage() {
               <p style={{ color: "rgba(255,255,255,0.4)", fontFamily: "sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: 3, textTransform: "uppercase", marginBottom: 20 }}>
                 Key Features
               </p>
-              <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 10,  }}>
                 {marathonFeatures.map((f) => (
                   <div
                     key={f.text}
-                    className="marathon-item"
+                    className="marathon-item "
                     style={{
                       display: "flex", gap: 14, alignItems: "center",
                       background: "rgba(255,255,255,0.04)",
                       border: "1px solid rgba(255,255,255,0.08)",
                       borderRadius: 8, padding: "12px 18px",
                       cursor: "default",
+                      
                     }}
                   >
                     <span style={{ fontSize: 18, flexShrink: 0 }}>{f.icon}</span>
-                    <span style={{ color: "rgba(255,255,255,0.75)", fontSize: 14, lineHeight: 1.5 }}>{f.text}</span>
+                    <span style={{ color: "#bfdbfa", fontSize: 14, lineHeight: 1.5 }}>{f.text}</span>
                   </div>
                 ))}
               </div>
