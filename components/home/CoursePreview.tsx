@@ -16,7 +16,7 @@ const subjectTags = [
   ["Keam","NEET","JEE"],
   ["Computer Fundamentals", "IT Theory"],
   ["Biology","Physics","Chemistry","Mathematics"],
-  ["Compuer And digital skill"],
+  ["Computer And digital skill"],
   ["All Subjects", "Crash Course"],
   ["Digital learning library"],
   ["photography", "Videography", "Editing"],
@@ -24,7 +24,7 @@ const subjectTags = [
 
 export default function CoursePreview() {
   return (
-    <section className="section-padding" style={{ background: "#fff" }}>
+    <section className="section-padding" style={{ background: "#0a0a0a" }}>
       <style>{`
         .cp-grid {
           display: grid;
@@ -34,9 +34,10 @@ export default function CoursePreview() {
           align-items: stretch;
         }
 
+        /* Card */
         .cp-card {
-          background: #fff;
-          border: 1.5px solid #f1e8e8;
+          background: #111;
+          border: 1px solid #1f1f1f;
           border-radius: 16px;
           padding: 1.6rem;
           display: flex;
@@ -48,100 +49,114 @@ export default function CoursePreview() {
           height: 100%;
           box-sizing: border-box;
         }
+        /* red top bar reveal */
         .cp-card::before {
           content: '';
           position: absolute;
           top: 0; left: 0; right: 0;
-          height: 3px;
-          background: #;
+          height: 2px;
+          background: #d11215;
           transform: scaleX(0);
           transform-origin: left;
           transition: transform .28s ease;
         }
         .cp-card:hover {
-          border-color: #6B0119;
-          box-shadow: 0 8px 28px -6px rgba(220,38,38,0.15);
+          border-color: #d11215;
+          box-shadow: 0 8px 32px rgba(209,18,21,0.18);
           transform: translateY(-3px);
         }
         .cp-card:hover::before { transform: scaleX(1); }
         .cp-card:hover .cp-enroll {
-          background: #6B0119;
+          background: #d11215;
           color: #fff;
+          border-color: #d11215;
         }
         .cp-card:hover .cp-enroll svg { stroke: #fff; transform: translateX(2px); }
 
+        /* Icon box */
         .cp-icon-box {
-          width: 52px;
-          height: 52px;
-          border-radius: 14px;
-          background: #FEF2F2;
+          width: 48px;
+          height: 48px;
+          border-radius: 12px;
+          background: rgba(209,18,21,0.1);
+          border: 1px solid rgba(209,18,21,0.2);
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
-          transition: background .2s;
+          transition: background .2s, border-color .2s;
         }
-        .cp-card:hover .cp-icon-box { background: #6B0119; }
+        .cp-card:hover .cp-icon-box {
+          background: #d11215;
+          border-color: #d11215;
+        }
         .cp-card:hover .cp-icon-box svg { stroke: #fff; }
 
+        /* Number badge */
         .cp-num-badge {
-          font-size: .68rem;
+          font-size: .66rem;
           font-weight: 700;
-          letter-spacing: .08em;
+          letter-spacing: .1em;
           text-transform: uppercase;
-          color: #6B0119;
-          background: #FEF2F2;
-          border-radius: 8px;
+          color: #d11215;
+          background: rgba(209,18,21,0.1);
+          border: 1px solid rgba(209,18,21,0.2);
+          border-radius: 6px;
           padding: .28rem .6rem;
           line-height: 1;
-          border: 1px solid #fecaca;
         }
 
+        /* Subject tag */
         .cp-tag {
-          font-size: .65rem;
+          font-size: .62rem;
           font-weight: 600;
           letter-spacing: .05em;
           text-transform: uppercase;
-          color: #991B1B;
-          background: #FEF2F2;
-          border: 1px solid #fecaca;
-          border-radius: 5px;
-          padding: .18rem .55rem;
+          color: #d11215;
+          background: rgba(209,18,21,0.08);
+          border: 1px solid rgba(209,18,21,0.18);
+          border-radius: 4px;
+          padding: .18rem .5rem;
           white-space: nowrap;
         }
 
+        /* Enroll button */
         .cp-enroll {
           display: inline-flex;
           align-items: center;
           gap: 7px;
-          font-size: .78rem;
+          font-size: .76rem;
           font-weight: 700;
           letter-spacing: .04em;
           text-transform: uppercase;
-          color: #6B0119;
-          background: #FEF2F2;
-          border-radius: 10px;
-          padding: .6rem 1.1rem;
+          color: #d11215;
+          background: rgba(209,18,21,0.08);
+          border: 1px solid rgba(209,18,21,0.2);
+          border-radius: 9px;
+          padding: .55rem 1rem;
           align-self: flex-start;
-          transition: background .2s, color .2s;
+          transition: background .2s, color .2s, border-color .2s;
         }
         .cp-enroll svg { transition: stroke .2s, transform .2s; }
 
+        /* Card footer */
         .cp-footer-bar {
           display: flex;
           align-items: center;
           justify-content: space-between;
           padding-top: 1rem;
           margin-top: auto;
-          border-top: 1px solid #f1e8e8;
+          border-top: 1px solid #1f1f1f;
         }
 
+        /* Stats strip */
         .stats-strip {
           display: flex;
-          border: 2.5px solid #f1e8e8;
-          border-radius: 14px;
+          border: 1px solid #1f1f1f;
+          border-radius: 12px;
           overflow: hidden;
           margin-top: 2rem;
+          background: #111;
         }
         .stats-cell {
           flex: 1;
@@ -149,19 +164,19 @@ export default function CoursePreview() {
           flex-direction: column;
           align-items: center;
           padding: 1.1rem .5rem;
-          background: #fff;
-          border: 2px solid #f1e8e8;
-          gap: .2rem;
+          gap: .25rem;
+          border-right: 1px solid #1f1f1f;
         }
         .stats-cell:last-child { border-right: none; }
 
+        /* Responsive */
         @media (max-width: 900px) {
           .cp-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 560px) {
           .cp-grid { grid-template-columns: 1fr; }
           .stats-strip { flex-wrap: wrap; }
-          .stats-cell { min-width: 50%; border-bottom: 1.5px solid #fecaca; }
+          .stats-cell { min-width: 50%; border-bottom: 1px solid #1f1f1f; }
         }
       `}</style>
 
@@ -174,13 +189,14 @@ export default function CoursePreview() {
             <span style={{
               display: "inline-flex", alignItems: "center", justifyContent: "center",
               width: "26px", height: "26px", borderRadius: "8px",
-              background: "#FEF2F2",
+              background: "rgba(209,18,21,0.1)",
+              border: "1px solid rgba(209,18,21,0.2)",
             }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6B0119" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d11215" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
                 <path d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 3.741-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
               </svg>
             </span>
-            <span style={{ fontSize: "11px", fontWeight: 700, letterSpacing: ".2em", textTransform: "uppercase", color: "#6B0119" }}>
+            <span style={{ fontSize: "11px", fontWeight: 700, letterSpacing: ".2em", textTransform: "uppercase", color: "#d11215" }}>
               Our Courses
             </span>
           </div>
@@ -189,13 +205,13 @@ export default function CoursePreview() {
             <h2 style={{
               fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)",
               fontWeight: 800,
-              color: "#111",
+              color: "#fff",
               lineHeight: 1.15,
               letterSpacing: "-.025em",
               margin: 0,
             }}>
               Courses Built for<br />
-              <span style={{ color: "#6B0119" }}>Student Success</span>
+              <span style={{ color: "#d11215" }}>Student Success</span>
             </h2>
             <p style={{
               fontSize: ".875rem",
@@ -217,7 +233,7 @@ export default function CoursePreview() {
               ["8+",   "Years of Trust"],
             ].map(([num, label]) => (
               <div key={label} className="stats-cell">
-                <span style={{ fontSize: "1.55rem", fontWeight: 800, color: "#6B0119", lineHeight: 1 }}>{num}</span>
+                <span style={{ fontSize: "1.55rem", fontWeight: 800, color: "#d11215", lineHeight: 1 }}>{num}</span>
                 <span style={{ fontSize: ".67rem", color: "#6b7280", fontWeight: 600, letterSpacing: ".05em", textTransform: "uppercase", textAlign: "center" }}>{label}</span>
               </div>
             ))}
@@ -237,8 +253,8 @@ export default function CoursePreview() {
                   {/* Icon + badge */}
                   <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: "1.1rem" }}>
                     <div className="cp-icon-box">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="#6B0119" strokeWidth={1.7}
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+                        stroke="#d11215" strokeWidth={1.7}
                         strokeLinecap="round" strokeLinejoin="round">
                         <path d={icon.path} />
                       </svg>
@@ -250,9 +266,9 @@ export default function CoursePreview() {
 
                   {/* Title */}
                   <h3 style={{
-                    fontSize: "1.05rem",
+                    fontSize: "1.02rem",
                     fontWeight: 700,
-                    color: "#111",
+                    color: "#fff",
                     lineHeight: 1.35,
                     margin: "0 0 .45rem",
                     letterSpacing: "-.015em",
@@ -277,18 +293,17 @@ export default function CoursePreview() {
                     ))}
                   </div>
 
-                  {/* Spacer */}
                   <div style={{ flexGrow: 1 }} />
 
                   {/* Footer */}
                   <div className="cp-footer-bar">
                     <span className="cp-enroll">
                       Enroll Now
-                      <svg viewBox="0 0 16 16" fill="none" stroke="#6B0119" strokeWidth={2} width={13} height={13} strokeLinecap="round" strokeLinejoin="round">
+                      <svg viewBox="0 0 16 16" fill="none" stroke="#d11215" strokeWidth={2} width={12} height={12} strokeLinecap="round" strokeLinejoin="round">
                         <path d="M3 8h10M9 4l4 4-4 4" />
                       </svg>
                     </span>
-                    <span style={{ fontSize: ".72rem", color: "#9ca3af", fontWeight: 500 }}>
+                    <span style={{ fontSize: ".72rem", color: "#4b5563", fontWeight: 500 }}>
                       View Details →
                     </span>
                   </div>

@@ -21,7 +21,7 @@ export default function Navbar() {
           top: 0;
           z-index: 100;
           background: #fff;
-          border-bottom: 1px solid #f0e0e3;
+          border-bottom: 1px solid #f0f0f0;
         }
 
         .nav-inner {
@@ -49,9 +49,7 @@ export default function Navbar() {
           display: block;
         }
         @media (max-width: 768px) {
-          .brand-logo {
-            height: 36px;
-          }
+          .brand-logo { height: 36px; }
         }
 
         /* ── Desktop links ── */
@@ -79,9 +77,12 @@ export default function Navbar() {
           white-space: nowrap;
           position: relative;
         }
-        .nav-link:hover { color: #6B0119; background: #fdf0f2; }
+        .nav-link:hover {
+          color: #d11215;
+          background: #fff0f0;
+        }
         .nav-link.active {
-          color: #6B0119;
+          color: #d11215;
           font-weight: 700;
         }
         .nav-link.active::after {
@@ -92,14 +93,12 @@ export default function Navbar() {
           transform: translateX(-50%);
           width: 20px;
           height: 2px;
-          background: #6B0119;
+          background: #d11215;
           border-radius: 2px;
         }
 
         /* ── Dropdown ── */
-        .dropdown-wrap {
-          position: relative;
-        }
+        .dropdown-wrap { position: relative; }
 
         .dropdown {
           position: absolute;
@@ -107,11 +106,11 @@ export default function Navbar() {
           left: 50%;
           transform: translateX(-50%);
           background: #fff;
-          border: 1px solid #f0e0e3;
+          border: 1px solid #f0e0e0;
           border-radius: 14px;
           padding: .5rem;
           min-width: 220px;
-          box-shadow: 0 16px 40px -8px rgba(107,1,25,0.14);
+          box-shadow: 0 16px 40px -8px rgba(209,18,21,0.1);
           z-index: 200;
           animation: dropIn .16s ease;
         }
@@ -128,8 +127,8 @@ export default function Navbar() {
           width: 9px;
           height: 9px;
           background: #fff;
-          border-top: 1px solid #f0e0e3;
-          border-left: 1px solid #f0e0e3;
+          border-top: 1px solid #f0e0e0;
+          border-left: 1px solid #f0e0e0;
         }
 
         .dropdown-item {
@@ -149,14 +148,17 @@ export default function Navbar() {
           width: 5px;
           height: 5px;
           border-radius: 50%;
-          background: #f0e0e3;
+          background: #f0e0e0;
           flex-shrink: 0;
           transition: background .15s;
         }
-        .dropdown-item:hover { background: #fdf0f2; color: #6B0119; }
-        .dropdown-item:hover::before { background: #6B0119; }
-        .dropdown-item.active-child { color: #6B0119; font-weight: 600; }
-        .dropdown-item.active-child::before { background: #6B0119; }
+        .dropdown-item:hover {
+          background: #fff0f0;
+          color: #d11215;
+        }
+        .dropdown-item:hover::before { background: #d11215; }
+        .dropdown-item.active-child  { color: #d11215; font-weight: 600; }
+        .dropdown-item.active-child::before { background: #d11215; }
 
         .nav-overlay {
           position: fixed;
@@ -174,7 +176,7 @@ export default function Navbar() {
           letter-spacing: .04em;
           text-transform: uppercase;
           color: #fff;
-          background: #6B0119;
+          background: #d11215;
           border-radius: 10px;
           padding: .55rem 1.1rem;
           text-decoration: none;
@@ -183,8 +185,8 @@ export default function Navbar() {
           white-space: nowrap;
         }
         .cta:hover {
-          background: #530114;
-          box-shadow: 0 4px 16px -4px rgba(107,1,25,0.35);
+          background: #b00e11;
+          box-shadow: 0 4px 16px -4px rgba(209,18,21,0.45);
         }
 
         /* ── Mobile toggle ── */
@@ -193,16 +195,16 @@ export default function Navbar() {
           background: none;
           border: none;
           cursor: pointer;
-          color: #6B0119;
+          color: #d11215;
           padding: .35rem;
           border-radius: 8px;
           transition: background .15s;
         }
-        .mobile-btn:hover { background: #fdf0f2; }
+        .mobile-btn:hover { background: #fff0f0; }
 
         /* ── Mobile menu ── */
         .mobile {
-          border-top: 1px solid #f0e0e3;
+          border-top: 1px solid #f0f0f0;
           padding: .75rem 1.25rem 1.25rem;
           display: flex;
           flex-direction: column;
@@ -223,18 +225,18 @@ export default function Navbar() {
           border: none;
           cursor: pointer;
           padding: .75rem .5rem;
-          border-bottom: 1px solid #fdf0f2;
+          border-bottom: 1px solid #f5f5f5;
           text-align: left;
           transition: color .15s;
         }
-        .mobile-item:hover { color: #6B0119; }
-        .mobile-item.active-mobile { color: #6B0119; font-weight: 700; }
+        .mobile-item:hover { color: #d11215; }
+        .mobile-item.active-mobile { color: #d11215; font-weight: 700; }
 
         .mobile-sub {
           display: flex;
           flex-direction: column;
           padding: .25rem 0 .25rem 1rem;
-          border-left: 2px solid #f0e0e3;
+          border-left: 2px solid #f0e0e0;
           margin: .15rem 0 .15rem .5rem;
           gap: .1rem;
         }
@@ -247,11 +249,14 @@ export default function Navbar() {
           border-radius: 8px;
           transition: color .15s, background .15s;
         }
-        .mobile-sub a:hover { color: #6B0119; background: #fdf0f2; }
+        .mobile-sub a:hover {
+          color: #d11215;
+          background: #fff0f0;
+        }
         .mobile-sub a.active-child-mobile {
-          color: #6B0119;
+          color: #d11215;
           font-weight: 600;
-          background: #fdf0f2;
+          background: #fff0f0;
         }
 
         .mobile-cta {
@@ -263,17 +268,17 @@ export default function Navbar() {
           letter-spacing: .05em;
           text-transform: uppercase;
           color: #fff;
-          background: #6B0119;
+          background: #d11215;
           border-radius: 12px;
           padding: .85rem 1rem;
           text-decoration: none;
           margin-top: .75rem;
           transition: background .18s;
         }
-        .mobile-cta:hover { background: #530114; }
+        .mobile-cta:hover { background: #b00e11; }
 
         @media (max-width: 768px) {
-          .nav-links { display: none; }
+          .nav-links  { display: none; }
           .mobile-btn { display: flex; }
         }
       `}</style>
@@ -285,7 +290,7 @@ export default function Navbar() {
       <header className="nav">
         <nav className="nav-inner">
 
-          {/* Brand — logo image */}
+          {/* Brand */}
           <Link href="/" className="brand">
             <Image
               src="/images/asplogo.png"
@@ -381,7 +386,7 @@ export default function Navbar() {
                         style={{
                           transform: open ? "rotate(180deg)" : "none",
                           transition: "transform .2s",
-                          color: isParentActive ? "#6B0119" : undefined,
+                          color: isParentActive ? "#d11215" : undefined,
                         }}
                       />
                     </button>

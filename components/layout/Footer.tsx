@@ -8,18 +8,19 @@ export default function Footer() {
       <style>{`
         .footer-link {
           font-size: 14px;
-          color: rgba(255, 255, 255, 0.65);
+          color: rgba(255, 255, 255, 0.55);
           text-decoration: none;
           transition: color 0.15s ease;
         }
         .footer-link:hover {
-          color: #ffffff;
+          color: #d11215;
         }
       `}</style>
 
       <footer
         style={{
-          background: "#6B0119",
+          background: "#0a0a0a",
+          borderTop: "1px solid #1a1a1a",
           fontFamily: "inherit",
         }}
       >
@@ -36,33 +37,33 @@ export default function Footer() {
           >
             {/* Brand */}
             <div>
-             <Link
-  href="/"
-  className="brand"
-  style={{
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-start",
-  }}
->
-  <Image
-    src="/images/aspt.png"
-    alt="Aspire Tuition Centre"
-    width={70}
-    height={70}
-    priority
-    style={{
-      display: "block",
-      objectFit: "contain",
-      marginRight: "auto",
-    }}
-  />
-</Link>
+              <Link
+                href="/"
+                className="brand"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-start",
+                }}
+              >
+                <Image
+                  src="/images/aspt.png"
+                  alt="Aspire Tuition Centre"
+                  width={70}
+                  height={70}
+                  priority
+                  style={{
+                    display: "block",
+                    objectFit: "contain",
+                    marginRight: "auto",
+                  }}
+                />
+              </Link>
 
               <p
                 style={{
                   fontSize: "13px",
-                  color: "rgba(255,255,255,0.6)",
+                  color: "rgba(255,255,255,0.45)",
                   margin: "12px 0 0",
                   lineHeight: 1.7,
                   maxWidth: "200px",
@@ -75,7 +76,7 @@ export default function Footer() {
                 style={{
                   width: "32px",
                   height: "2px",
-                  background: "rgba(255,255,255,0.4)",
+                  background: "#d11215",
                   borderRadius: "2px",
                   marginTop: "20px",
                 }}
@@ -87,10 +88,10 @@ export default function Footer() {
               <h3
                 style={{
                   fontSize: "11px",
-                  fontWeight: 500,
-                  color: "rgba(255,255,255,0.45)",
+                  fontWeight: 600,
+                  color: "rgba(255,255,255,0.3)",
                   textTransform: "uppercase",
-                  letterSpacing: "0.1em",
+                  letterSpacing: "0.15em",
                   margin: "0 0 16px",
                 }}
               >
@@ -99,8 +100,8 @@ export default function Footer() {
 
               <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
                 {[
-                  { href: "/", label: "Home" },
-                  { href: "/about", label: "About" },
+                  { href: "/",        label: "Home"    },
+                  { href: "/about",   label: "About"   },
                   { href: "/gallery", label: "Gallery" },
                   { href: "/contact", label: "Contact" },
                 ].map(({ href, label }) => (
@@ -116,10 +117,10 @@ export default function Footer() {
               <h3
                 style={{
                   fontSize: "11px",
-                  fontWeight: 500,
-                  color: "rgba(255,255,255,0.45)",
+                  fontWeight: 600,
+                  color: "rgba(255,255,255,0.3)",
                   textTransform: "uppercase",
-                  letterSpacing: "0.1em",
+                  letterSpacing: "0.15em",
                   margin: "0 0 16px",
                 }}
               >
@@ -128,7 +129,7 @@ export default function Footer() {
 
               <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
                 {[
-                  { href: "/courses/next", label: "Aspire Next" },
+                  { href: "/courses/next",  label: "Aspire Next"  },
                   { href: "/courses/elite", label: "Aspire Elite" },
                   { href: "/courses/smart", label: "Aspire Smart" },
                 ].map(({ href, label }) => (
@@ -144,10 +145,10 @@ export default function Footer() {
               <h3
                 style={{
                   fontSize: "11px",
-                  fontWeight: 500,
-                  color: "rgba(255,255,255,0.45)",
+                  fontWeight: 600,
+                  color: "rgba(255,255,255,0.3)",
                   textTransform: "uppercase",
-                  letterSpacing: "0.1em",
+                  letterSpacing: "0.15em",
                   margin: "0 0 16px",
                 }}
               >
@@ -161,9 +162,9 @@ export default function Footer() {
                       key={info}
                       style={{
                         fontSize: "14px",
-                        color: "rgba(255,255,255,0.65)",
+                        color: "rgba(255,255,255,0.45)",
                         margin: 0,
-                        lineHeight: 1.5,
+                        lineHeight: 1.6,
                       }}
                     >
                       {info}
@@ -178,23 +179,33 @@ export default function Footer() {
           <div
             style={{
               marginTop: "3rem",
-              borderTop: "0.5px solid rgba(255,255,255,0.15)",
+              borderTop: "1px solid #1a1a1a",
               padding: "1.25rem 0",
               display: "flex",
               alignItems: "center",
-              justifyContent: "center",
+              justifyContent: "space-between",
+              flexWrap: "wrap",
+              gap: "8px",
             }}
           >
             <p
               style={{
                 fontSize: "12px",
-                color: "rgba(255,255,255,0.4)",
+                color: "rgba(255,255,255,0.25)",
                 margin: 0,
-                textAlign: "center",
               }}
             >
               © {new Date().getFullYear()} Aspire Tuition Centre. All rights reserved.
             </p>
+            <div
+              style={{
+                width: "6px",
+                height: "6px",
+                borderRadius: "50%",
+                background: "#d11215",
+                flexShrink: 0,
+              }}
+            />
           </div>
         </div>
       </footer>
